@@ -9,6 +9,9 @@
  * Reads digital touch input from TTP223 sensor
  * and displays structured output via Serial Monitor.
  */
+#define TOUCH_PIN 2
+int touchState = 0;
+
 
  // TODO 1:
  // Define touch sensor digital pin (Use pin 2)
@@ -17,28 +20,31 @@
  // Create variable to store touch state
 
 void setup() {
+    // Initialize Serial communication at 9600 baud
+    Serial.begin(9600);
 
-    // TODO 3:
-    // Initialize Serial communication (9600 baud rate)
-
-    // TODO 4:
     // Configure touch pin as INPUT
+    pinMode(TOUCH_PIN, INPUT);
 
-    // TODO 5:
-    // Print system initialization message
+    // System initialization message
+    Serial.println("TTP223 Touch System Initialized...");
+    Serial.println("----------------------------------");
 }
+
 
 void loop() {
 
-    // TODO 6:
-    // Read digital value from touch sensor
+    /// Read digital value from touch sensor (HIGH or LOW)
+    touchState = digitalRead(TOUCH_PIN);
 
-    // TODO 7:
-    // If touch detected (HIGH)
-    //     Print "Touch Detected"
-    // Else
-    //     Print "No Touch"
+    // Check if touch is detected
+    if (touchState == HIGH) {
+        Serial.println("Status: [Touch Detected]");
+    } else {
+        Serial.println("Status: [No Touch]");
+    }
 
-    // TODO 8:
-    // Add small delay (200–500ms)
+    // Small delay to prevent serial flooding
+    delay(300);
+
 }
